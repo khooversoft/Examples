@@ -41,10 +41,15 @@ namespace SqlTableMonitoring.Workers
         {
             while (!stoppingToken.IsCancellationRequested)
             {
+
                 IReadOnlyList<TableOne> results = await _tableOneService.Read();
+
+                _logger.LogInformation($"{nameof(Read)}: read - count={results.Count}");
 
                 results
                     .ForEach(x => _logger.LogInformation($"{nameof(Read)}: Id={x.Id}, Text={x.Text}"));
+
+                await Task.Delay(TimeSpan.FromSeconds(1));
             }
         }
 
@@ -54,9 +59,10 @@ namespace SqlTableMonitoring.Workers
 
             while (!stoppingToken.IsCancellationRequested)
             {
-                await _tableOneService.Write(count.ToString(), $"Text_{count}");
-
                 await Task.Delay(TimeSpan.FromSeconds(5));
+
+                await _tableOneService.Write(count.ToString(), $"Text_{count}");
+                count++;
             }
         }
     }

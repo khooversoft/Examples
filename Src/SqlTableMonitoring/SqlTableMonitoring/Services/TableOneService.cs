@@ -24,6 +24,6 @@ namespace SqlTableMonitoring.Services
 
         public async Task<IReadOnlyList<TableOne>> Read() => await _sqlService.Select<TableOne>("select * from dbo.TableOne", TableOne.Read);
 
-        public async Task Write(string id, string text) => await _sqlService.Exceute($"insert into dbo.TableOne (Id, Text) values ({id}, {text}");
+        public async Task Write(string id, string text) => await _sqlService.Exceute($"insert into dbo.TableOne (Id, Text) values ('{id}', '{text}')");
     }
 }

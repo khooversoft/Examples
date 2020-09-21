@@ -7,15 +7,16 @@ using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace SqlTableMonitoring.Services
 {
-    public class SqlService
+    public class SqlService : IDisposable
     {
         private readonly IOption _option;
         private readonly ILogger<SqlService> _logger;
-        private readonly SqlConnection _sqlConnection;
+        private SqlConnection _sqlConnection;
 
         public SqlService(IOption option, ILogger<SqlService> logger)
         {
@@ -23,12 +24,14 @@ namespace SqlTableMonitoring.Services
             _logger = logger;
 
             _sqlConnection = new SqlConnection(_option.SqlOption.GetResolvedConnectionString());
+            _sqlConnection.Open();
         }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Security", "CA2100:Review SQL queries for security vulnerabilities", Justification = "<Pending>")]
         public async Task<IReadOnlyList<T>> Select<T>(string query, Func<SqlDataReader, T> create, IEnumerable<SqlParameter>? sqlParameters = null)
             where T : IModel, new()
         {
+            _logger.LogInformation($"{nameof(Select)}: executing and reading: {query}");
             using SqlCommand command = new SqlCommand();
 
             command.Connection = _sqlConnection;
@@ -50,6 +53,8 @@ namespace SqlTableMonitoring.Services
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Security", "CA2100:Review SQL queries for security vulnerabilities", Justification = "<Pending>")]
         public async Task Exceute(string query, IEnumerable<SqlParameter>? sqlParameters = null)
         {
+            _logger.LogInformation($"{nameof(Exceute)}: executing: {query}");
+
             using SqlCommand command = new SqlCommand();
 
             command.Connection = _sqlConnection;
@@ -58,6 +63,11 @@ namespace SqlTableMonitoring.Services
             command.Parameters.AddRange(sqlParameters?.ToArray() ?? Array.Empty<SqlParameter>());
 
             await command.ExecuteNonQueryAsync(_option.CancellationTokenSource.Token);
+        }
+
+        public void Dispose()
+        {
+            Interlocked.Exchange(ref _sqlConnection, null!)?.Close();
         }
     }
 }
