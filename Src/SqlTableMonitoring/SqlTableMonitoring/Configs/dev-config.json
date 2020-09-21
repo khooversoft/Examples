@@ -1,0 +1,7 @@
+{
+  "SecretId": "SqlTableMonitoring",
+
+  "SqlOption": {
+    "ConnectionString": "Server=tcp:demo-stream-data.database.windows.net,1433;Initial Catalog=StreamData;Persist Security Info=False;User ID=Master;Password={password};MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;"
+  }
+}

@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30503.244
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SqlTableMonitoring", "SqlTableMonitoring\SqlTableMonitoring.csproj", "{F5A88220-C01E-4A44-9540-8C0F820BF10C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Toolbox", "Toolbox\Toolbox.csproj", "{CFE8996B-9AE2-4BD9-B2C0-0807E5211756}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{F5A88220-C01E-4A44-9540-8C0F820BF10C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F5A88220-C01E-4A44-9540-8C0F820BF10C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F5A88220-C01E-4A44-9540-8C0F820BF10C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F5A88220-C01E-4A44-9540-8C0F820BF10C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CFE8996B-9AE2-4BD9-B2C0-0807E5211756}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CFE8996B-9AE2-4BD9-B2C0-0807E5211756}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CFE8996B-9AE2-4BD9-B2C0-0807E5211756}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CFE8996B-9AE2-4BD9-B2C0-0807E5211756}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {9FC54AF1-75F6-42B6-83F5-9D9B89C214B5}
+	EndGlobalSection
+EndGlobal
